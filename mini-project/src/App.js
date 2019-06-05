@@ -18,7 +18,7 @@ class App extends Component
       list: true,
       filtered: false,
       paintings: paintingData,
-      // newPaintings: [],
+      newPaintings: [],
       likes: 0
     }
   }
@@ -47,10 +47,7 @@ class App extends Component
 
  filteredGifs = (e) => 
  {
-  //  console.log(e.target.value)
-  //  console.log(this.state.paintings)
-
-  
+   console.log(e.target.value)
    let newPaintings = []
    this.state.paintings.map(painting => {
      if(painting.title.includes(e.target.value)) {
@@ -61,6 +58,7 @@ class App extends Component
     // debugger
    this.setState(
     {
+      filtered: true,
       newPaintings
     })
 
@@ -80,7 +78,7 @@ class App extends Component
       <div className="App">
         <header className="App-header">
           <Header switchView = {this.switchView} filteredGifs = {this.filteredGifs}/>
-          {this.state.list ? <List paintings = {this.state.paintings} addLike = {this.addLike}/> : <Form newGif = {this.newGif}/>}
+          {this.state.list && !this.state.filtered ? <List paintings = {this.state.paintings} addLike = {this.addLike}/> : <Form newGif = {this.newGif}/>}
           {this.state.filtered ? <List newPaintings={this.state.newPaintings} addLike = {this.addLike}/> : <List paintings = {this.state.paintings} addLike = {this.addLike}/>}
         </header>
       </div>
